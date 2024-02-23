@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextblazor-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nextblazor
+  template:
+    metadata:
+      labels:
+        app: nextblazor
+    spec:
+      containers:
+      - name: nextblazor-container
+        image: mamun/nextblazor-app:latest
+        ports:
+        - containerPort: 80
