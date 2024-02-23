@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: nextblazor-container
-        image: mamun/nextblazor-app:latest
+        image: 1almamun/aws_docker_example:latest
         ports:
         - containerPort: 80
