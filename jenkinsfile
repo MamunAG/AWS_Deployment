@@ -18,7 +18,8 @@ pipeline {
             steps {
                 script {
                     // Set the kubeconfig path
-                    def kubeconfigPath = "${HOME}/.kube/config"
+                    //def kubeconfigPath = "${HOME}/.kube/config"
+                    def kubeconfigPath = "../.kube/config"
 
                     // Apply the YAML configuration using kubectl
                     sh "kubectl apply -f k8s/deployment.yaml --kubeconfig=${kubeconfigPath} --namespace=next"
