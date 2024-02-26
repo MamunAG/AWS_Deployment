@@ -23,7 +23,8 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    sh 'sudo kubectl get pods -n argocd'
+                    kubernetesDeploy(configs: "k8s/deployment.yaml", 
+                                         "k8s/service.yaml")
                 }
             }
         }
