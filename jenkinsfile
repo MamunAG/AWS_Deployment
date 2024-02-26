@@ -21,11 +21,15 @@ pipeline {
         }
     
         stage('Building image') {
-            steps{
-                script {
-                    kubernetesDeploy(configs: "k8s/deployment.yaml", 
-                                         "k8s/service.yaml")
+            agent {
+                kubernetes {
+                //customWorkspace 'some/other/path'
+                defaultContainer 'maven'
+                yamlFile 'k8s/deployment.yaml'
                 }
+            }
+            steps{
+                sh "echo Workspace dir is"
             }
         }
 
