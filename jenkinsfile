@@ -23,7 +23,7 @@ pipeline {
         stage('Building image') {
             steps{
                 script {
-                    sh 'sudo kubectl get pods -n argocd'
+                    sh 'kubectl get pods -n argocd'
                 }
             }
         }
