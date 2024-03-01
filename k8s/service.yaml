@@ -15,5 +15,5 @@ spec:
       targetPort: 8080
     - protocol: TCP
       port: 9000
-      targetPort: 9000 # Adjust the targetPort as needed for your application
+      targetPort: 9000
   type: LoadBalancer
