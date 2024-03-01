@@ -38,28 +38,11 @@ pipeline {
                     sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' k8s/deployment.yaml
                     cat k8s/deployment.yaml 
 
-git remote set-url origin https://github.com/MamunAG/AWS_Deployment.git
+  git remote set-url origin https://github.com/MamunAG/AWS_Deployment.git
                     """
                 }
             }
         }
-stage('Update GIT') {
-  steps {
-    script {
-      catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-        withCredentials([usernamePassword(credentialsId: 'github_uk', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-            def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
-            sh "git config user.email mamun166036@yahoo.com"
-            sh "git config user.name MamunAG"
-            sh "git add ."
-            sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
-            sh "git push https://github.com/MamunAG/AWS_Deployment.git"
-        }
-      }
-    }
-
-  }
-}
 
         stage('Push the changed deployment file to Git') {
             steps{
@@ -71,7 +54,7 @@ stage('Update GIT') {
                         git commit -m "updated the deployment file"
                     """
                     withCredentials([gitUsernamePassword(credentialsId: 'github_uk', gitToolName:'Default')]){
-                        sh "git push origin HEAD:master"
+                        sh "git push https://github.com/MamunAG/AWS_Deployment.git"
                     }
 
                 }
