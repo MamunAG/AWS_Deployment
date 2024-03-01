@@ -7,13 +7,16 @@ spec:
   selector:
     app: nextblazor
   ports:
-    - protocol: TCP
+    - name: port-80
+      protocol: TCP
       port: 80
       targetPort: 80
-    - protocol: TCP
+    - name: port-8080
+      protocol: TCP
       port: 8080
       targetPort: 8080
-    - protocol: TCP
+    - name: port-9000
+      protocol: TCP
       port: 9000
       targetPort: 9000
   type: LoadBalancer
