@@ -55,7 +55,7 @@ pipeline {
                     """
        withCredentials([usernamePassword(credentialsId: 'github_UP', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                    // withCredentials([gitUsernamePassword(credentialsId: 'github_sc', gitToolName:'Default')]){
-                        sh "git push git@github.com:MamunAG/AWS_Deployment.git"
+                        sh "git push https://github.com/MamunAG/AWS_Deployment.git"
                     }
 
                 }
