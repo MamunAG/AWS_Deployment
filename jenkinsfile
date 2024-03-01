@@ -23,7 +23,7 @@ pipeline {
         stage('Checkout SCM') {
             steps{
                 script{
-                    git credentialsId: 'github_uk',
+                    git credentialsId: 'github_UP',
                     url: 'https://github.com/MamunAG/AWS_Deployment.git',
                     branch: 'main'
                 }
