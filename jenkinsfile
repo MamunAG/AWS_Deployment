@@ -20,15 +20,15 @@ pipeline {
             }
         }
 
-        //stage('Checkout SCM') {
-           // steps{
-             //   script{
-                 //   git credentialsId: 'github_uk',
-                //    url: 'https://github.com/MamunAG/AWS_Deployment.git',
-               //     branch: 'main'
-              //  }
-           // }
-        //}
+        stage('Checkout SCM') {
+            steps{
+                script{
+                    git credentialsId: 'github_uk',
+                    url: 'https://github.com/MamunAG/AWS_Deployment.git',
+                    branch: 'master'
+                }
+            }
+        }
 
         stage('Updating kubernetes deploymnet file') {
             steps{
