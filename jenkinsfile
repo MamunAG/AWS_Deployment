@@ -2,7 +2,7 @@ pipeline {
     agent any
  
     environment {
-        registry = '1almamun/aws_docker_example'
+        APP_NAME = '1almamun/aws_docker_example'
         registryCredentialUp = 'docker_up'
         dockerImage = ''
     }
