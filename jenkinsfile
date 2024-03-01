@@ -51,7 +51,7 @@ pipeline {
                         git add k8s/deployment.yaml
                         git commit -m "updated the deployment file"
                     """
-                    withCredentials([gitUsernamePassword(credentialsId: 'github_uk', gitToolName:'Default')]){
+                    withCredentials([gitUsernamePassword(credentialsId: 'github_UP', gitToolName:'Default')]){
                         sh "git push https://github.com/MamunAG/AWS_Deployment.git master"
                     }
 
