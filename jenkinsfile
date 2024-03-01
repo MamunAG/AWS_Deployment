@@ -52,7 +52,7 @@ pipeline {
                         git commit -m "updated the deployment file"
                     """
                     withCredentials([gitUsernamePassword(credentialsId: 'github_uk', gitToolName:'Default')]){
-                        sh "git push https://github.com/MamunAG/AWS_Deployment.git main"
+                        sh "git push https://github.com/MamunAG/AWS_Deployment.git master"
                     }
 
                 }
