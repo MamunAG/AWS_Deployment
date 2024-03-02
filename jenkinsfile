@@ -3,33 +3,24 @@ pipeline {
  
     environment {
         APP_NAME = 'aws_docker_example'
-        registryCredentialUp = 'docker_up'
-        dockerImage = ''
     }
 
     stages {
-        stage('Start') {
+        
+        stage('Clear') {
             steps {
-                echo 'Pipeline start.'
+                deleteDir()
             }
         }
-
-        stage('Deployment') {
+        
+        stage('checkout scm') {
             steps {
-                echo 'Deployment start.'
+                checkout scmGit(
+                    branches: [[name: '*/master']],
+                    userRemoteConfigs: [[url: 'https://github.com/MamunAG/AWS_Deployment.git']])
             }
         }
-
-        stage('Checkout SCM') {
-            steps{
-                script{
-                    git credentialsId: 'github_uk',
-                    url: 'https://github.com/MamunAG/AWS_Deployment.git',
-                    branch: 'master'
-                }
-            }
-        }
-
+        
         stage('Updating kubernetes deploymnet file') {
             steps{
                 script{
@@ -37,13 +28,11 @@ pipeline {
                     cat k8s/deployment.yaml
                     sed -i 's/${APP_NAME}.*/${APP_NAME}:${IMAGE_TAG}/g' k8s/deployment.yaml
                     cat k8s/deployment.yaml 
-
-  git remote set-url origin https://github.com/MamunAG/AWS_Deployment.git
                     """
                 }
             }
         }
-
+        
         stage('Push the changed deployment file to Git') {
             steps{
                 script{
@@ -53,11 +42,11 @@ pipeline {
                         git add k8s/deployment.yaml
                         git commit -m "updated the deployment file"
                     """
-       withCredentials([usernamePassword(credentialsId: 'github_UP', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                   // withCredentials([gitUsernamePassword(credentialsId: 'github_sc', gitToolName:'Default')]){
-                        sh "git push https://github.com/MamunAG/AWS_Deployment.git"
+                    
+                    withCredentials([gitUsernamePassword(credentialsId: 'github_uk', gitToolName: 'Default')]) {
+                        sh "git push origin HEAD:master"
                     }
-
+                    
                 }
             }
         }
