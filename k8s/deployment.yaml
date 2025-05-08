@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nextblazor-deployment
-  namespace: next # Change the namespace name
+  namespace: click # Change the namespace name
 spec:
   replicas: 3
   selector:
